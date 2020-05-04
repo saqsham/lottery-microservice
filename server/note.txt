@@ -1,0 +1,4 @@
+# sequelize init
+# sequelize model:create --name Todo --attributes title:string
+# sequelize model:create --name TodoItem --attributes content:string,complete:boolean
+# sequelize db:migrate

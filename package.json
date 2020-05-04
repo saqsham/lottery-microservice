@@ -1,0 +1,22 @@
+{
+  "name": "mulgamserver",
+  "version": "1.0.0",
+  "description": "games I assume",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "cd server && set DEBUG=myapp:* && npm start",
+    "server": "npm start",
+    "client": "cd client && npm run android",
+    "client-server": "cd client && npm start",
+    "db-start": "cd docker && docker-compose up --build",
+    "dev": "concurrently \"npm run server\" \"npm run client-server\" \"npm run client\""
+  },
+  "author": "saqsham",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "0.0.8",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "start-debug": "DEBUG=server:* npm start",
+    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "make-runnable": "^1.3.6",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "npm-run-all": "^4.1.5",
+    "pg": "^8.0.0",
+    "pg-hstore": "^2.3.3",
+    "pug": "^2.0.4",
+    "sequelize": "^5.21.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babel-watch": "^7.0.0",
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1"
+  }
+}
