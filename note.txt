@@ -5,3 +5,4 @@ You can delete all the contents from client folder and start from scratch
 
 And also you have to make the required webpages for admin, web-based only
 make them in a separate folder eg: admin, on the root itself
+
