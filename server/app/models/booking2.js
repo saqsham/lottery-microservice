@@ -1,36 +1,30 @@
-
 module.exports = (sequelize, DataTypes) => {
     const Booking2 = sequelize.define('Booking2', {
         twoDigit: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-          }
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            }
         },
         betValue: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-          }
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+            }
         },
         amountWon: {
             type: DataTypes.INTEGER,
             defaultValue: 0,
         },
-        is_open: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
+        birth: {
+            type: DataTypes.STRING,
+            defaultValue: null,
         }
     });
 
     Booking2.associate = (models) => {
-        // User.hasMany(models.BetHistory, {
-        //     foreignKey: 'twoDigit',
-        //     as: 'userBet',
-        // }),
-
         Booking.belongsTo(models.User, {
             foreignKey: 'userId',
             onDelete: 'CASCADE',
@@ -39,10 +33,14 @@ module.exports = (sequelize, DataTypes) => {
 
     Booking2.calculate = async () => {
         try {
-            let countmin = await Booking2.findAll({
-                attributes: { include: [[sequelize.fn('COUNT', sequelize.col('oneDigit'))]]},
-                limit: 1,
-            });
+            let countmin = await Money.findAll({
+                attributes: [
+                    ['twoDigit', 'twoDigit'],
+                    [sequelize.fn('COUNT', sequelize.col('twoDigit')), 'n_first']
+                ],
+                group: 'twoDigit',
+                raw: true
+            })
             return countmin
         } catch (error) {
             console.error(error);
@@ -59,15 +57,15 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
 
-    Booking2.checkBet = async (userId, oneDigit) => {
+    Booking2.checkBet = async (userId, twoDigit) => {
         try {
             let check = await Booking2
-            .findOne({
-                where: {
-                    userId: userId,
-                    oneDigit: oneDigit,
-                }
-            });
+                .findOne({
+                    where: {
+                        userId: userId,
+                        twoDigit: twoDigit,
+                    }
+                });
             if (!check) {
                 return true
             } else {
@@ -80,4 +78,3 @@ module.exports = (sequelize, DataTypes) => {
 
     return Booking2;
 };
-

@@ -3,9 +3,10 @@
   "version": "0.0.8",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "start-debug": "DEBUG=server:* npm start",
-    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
+    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
+    "start-dev": "nodemon --exec npm run start-debug"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
@@ -22,10 +23,12 @@
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "npm-run-all": "^4.1.5",
+    "paytm-pg-node-sdk": "^1.0.1",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
     "pug": "^2.0.4",
-    "sequelize": "^5.21.6"
+    "sequelize": "^5.21.6",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

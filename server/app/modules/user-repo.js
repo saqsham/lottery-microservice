@@ -1,7 +1,7 @@
-const User = require('../models').User
+// const User = require('../models').User
 
-class UserRepo {
-    create(data) {
-        return User.create(data)
-    }
-}
+// class UserRepo {
+//     create(data) {
+//         return User.create(data)
+//     }
+// }

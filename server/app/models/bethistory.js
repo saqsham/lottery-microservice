@@ -1,11 +1,11 @@
-module.exports  = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const BetHistory = sequelize.define('BetHistory', {
-        
+
         betValue: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
-              notEmpty: true,
+                notEmpty: true,
             }
         },
 
@@ -13,7 +13,7 @@ module.exports  = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
-              notEmpty: true,
+                notEmpty: true,
             }
         },
 
@@ -33,7 +33,7 @@ module.exports  = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
-              defaultValue: 0,
+                defaultValue: 0,
             }
         },
 
@@ -49,19 +49,18 @@ module.exports  = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             defaultValue: null,
         },
-        },
-        {
-            underscored: true,
-            freezeTableName: true
-        });
+    }, {
+        underscored: true,
+        freezeTableName: true
+    });
 
     BetHistory.associate = (models) => {
-        
+
         BetHistory.belongsTo(models.User, {
             foreignKey: 'userId',
             onDelete: 'CASCADE',
         });
     };
 
-  return BetHistory;
+    return BetHistory;
 };

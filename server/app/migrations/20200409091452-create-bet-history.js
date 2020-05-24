@@ -1,60 +1,74 @@
 module.exports = {
     up: (queryInterface, Sequelize) =>
-        queryInterface.createTable('User', {
+        queryInterface.createTable('BetHistory', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            username: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                unique: true,
-                validate: {
-                    notEmpty: true,
-                    len: [1, 100]
-                }
-            },
-            fullName: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                    len: [1, 100]
-                }
-            },
-            email: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                    isEmail: true
-                },
-                set(val) {
-                    this.setDataValue('email', val.toLowerCase());
-                },
-            },
-            password: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                    len: [8, 128]
-                }
-            },
-            phone: {
+
+            betValue: {
                 type: Sequelize.INTEGER,
-                allowNull: true,
+                allowNull: false,
+                validate: {
+                    notEmpty: true,
+                }
             },
-            is_admin: {
-                type: DataTypes.BOOLEAN,
+
+            betted_on: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: true,
+                }
+            },
+
+            moneyWon: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
+
+            winNum: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
+
+            moneyLost: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                validate: {
+                    defaultValue: 0,
+                }
+            },
+
+            is_win: {
+                type: Sequelize.BOOLEAN,
                 defaultValue: false,
             },
-            can_bet: {
-                type: DataTypes.BOOLEAN,
+
+            is_delete: {
+                type: Sequelize.BOOLEAN,
                 defaultValue: false,
             },
+
+            birth: {
+                type: Sequelize.STRING,
+                defaultValue: null,
+            },
+
+            userId: {
+                type: Sequelize.INTEGER,
+                onDelete: 'CASCADE',
+                refrences: {
+                    model: 'User',
+                    key: 'id',
+                    as: 'bookingBy',
+                },
+            },
+            
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
@@ -67,6 +81,7 @@ module.exports = {
             underscored: true,
             freezeTableName: true,
         }),
+
     down: (queryInterface /*, Sequelize */ ) =>
-        queryInterface.dropTable('User')
+        queryInterface.dropTable('BetHistory')
 };

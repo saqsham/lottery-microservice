@@ -1,5 +1,5 @@
-const MoneyChart = require('../models').MoneyChart;
-const User = require('../models').User;
+const MoneyChart = require('../models').MoneyChart
+const User = require('../models').User
 
 module.exports = {
 

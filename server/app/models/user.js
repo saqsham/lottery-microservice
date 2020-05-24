@@ -10,41 +10,41 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true,
             validate: {
-              notEmpty: true,
-              len: [1, 100]
+                notEmpty: true,
+                len: [1, 100]
             }
         },
         fullName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-              notEmpty: true,
-              len: [1, 100]
+                notEmpty: true,
+                len: [1, 100]
             }
         },
         email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-          validate: {
-            notEmpty: true,
-            isEmail: true
-          },
-          set(val) {
-            this.setDataValue('email', val.toLowerCase());
-          },
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                notEmpty: true,
+                isEmail: true
+            },
+            set(val) {
+                this.setDataValue('email', val.toLowerCase());
+            },
         },
         password: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-            len: [8, 128]
-          }
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true,
+                len: [8, 128]
+            }
         },
         phone: {
-          type: DataTypes.INTEGER,
-          allowNull: true,
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         is_admin: {
             type: DataTypes.BOOLEAN,
@@ -54,33 +54,32 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
-        },
-        {
-            underscored: true,
-            freezeTableName: true
-        });
+    }, {
+        underscored: true,
+        freezeTableName: true
+    });
 
     User.associate = (models) => {
         User.hasMany(models.Booking1, {
-            foreignKey: 'userId',
-            as: 'bookingBy',
-        }),
-        User.hasMany(models.Booking2, {
-            foreignKey: 'userId',
-            as: 'bookingBy',
-        }),
-        User.hasMany(models.Booking3, {
-            foreignKey: 'userId',
-            as: 'bookingBy',
-        }),
-        User.hasMany(models.BetHistory, {
-            foreignKey: 'userId',
-            as: 'bookingBy',
-        }),
-        User.hasOne(models.MoneyChart, {
-            foreignKey: 'userId',
-            as: 'userMoney',
-        });
+                foreignKey: 'userId',
+                as: 'bookingBy',
+            }),
+            User.hasMany(models.Booking2, {
+                foreignKey: 'userId',
+                as: 'bookingBy',
+            }),
+            User.hasMany(models.Booking3, {
+                foreignKey: 'userId',
+                as: 'bookingBy',
+            }),
+            User.hasMany(models.BetHistory, {
+                foreignKey: 'userId',
+                as: 'bookingBy',
+            }),
+            User.hasOne(models.MoneyChart, {
+                foreignKey: 'userId',
+                as: 'userMoney',
+            });
     };
 
     User.checkData = async (username, email, password, phone) => {
@@ -96,25 +95,20 @@ module.exports = (sequelize, DataTypes) => {
             throw new Error(`Wrong mail`)
         }
 
-        if(!phoneCheck(phone)) {
+        if (!phoneCheck(phone)) {
             throw new Error(`Wrong Number`)
         }
 
-        if(passwordCheck(password)) {
+        if (!passwordCheck(password)) {
             throw new Error(`Check password`)
         }
 
     }
 
-    User.beforeCreate = async function(user) {
+    User.beforeCreate = async function (user) {
         const salt = await bcrypt.genSalt(10); //whatever number you want
         user.password = await bcrypt.hash(user.password, salt);
     }
-    
-    // User.prototype.validPassword = async function(password) {
-    //     return await bcrypt.compareSync(password, this.password);
-    // }
-
 
     User.authUsingUsername = async (username, password) => {
         const user = await User.findOne({
@@ -122,10 +116,10 @@ module.exports = (sequelize, DataTypes) => {
                 username: username,
             }
         })
-        if (!user) 
+        if (!user)
             throw new Error(`User doesn't exist `)
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) 
+        if (!isMatch)
             throw new Error('Wrong username or password')
         return user
     }
@@ -136,10 +130,10 @@ module.exports = (sequelize, DataTypes) => {
                 email: email,
             }
         })
-        if (!user) 
+        if (!user)
             throw new Error(`User doesn't exist `)
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) 
+        if (!isMatch)
             throw new Error('Wrong email or password')
         return user
     }
@@ -151,14 +145,14 @@ module.exports = (sequelize, DataTypes) => {
                 phone: phone,
             }
         })
-        if (!user) 
+        if (!user)
             throw new Error(`User doesn't exist `)
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) 
+        if (!isMatch)
             throw new Error('Wrong username or password')
         return user
     }
-    
+
     User.adminAuth = async (username, password) => {
         const user = await User.findOne({
             where: {
@@ -166,10 +160,10 @@ module.exports = (sequelize, DataTypes) => {
                 is_admin: true,
             }
         })
-        if (!user) 
+        if (!user)
             throw new Error(`User doesn't exist `)
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) 
+        if (!isMatch)
             throw new Error('Wrong username or password')
         return user
     }
