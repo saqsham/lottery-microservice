@@ -28,7 +28,7 @@ module.exports = {
             raw: true,
         })
         .then(history => res.status(200).send(history))
-        .catch(error => res.catch(400).send(error));
+        .catch(error => res.status(400).send(error));
     },
 
 
