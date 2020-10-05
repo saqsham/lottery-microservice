@@ -1,55 +1,55 @@
 module.exports = {
-    up: (queryInterface, Sequelize) =>
-        queryInterface.createTable('Booking2', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            twoDigit: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                }
-            },
-            betValue: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                }
-            },
-            amountWon: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0,
-                allowNull: false,
-            },
-            birth: {
-                type: Sequelize.STRING,
-                defaultValue: null,
-            },
-            userId: {
-                type: Sequelize.INTEGER,
-                onDelete: 'CASCADE',
-                refrences: {
-                    model: 'User',
-                    key: 'id',
-                    as: 'bookingBy',
-                },
-            },
-            createdAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
-            updatedAt: {
-                allowNull: false,
-                type: Sequelize.DATE
-            },
-        }, {
-            freezeTableName: true,
-        }),
-    down: (queryInterface /*, Sequelize*/ ) =>
-        queryInterface.dropTable('Booking2')
-};
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable('Booking2', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      twoDigit: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        }
+      },
+      betValue: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        }
+      },
+      amountWon: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
+      birth: {
+        type: Sequelize.STRING,
+        defaultValue: null,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        refrences: {
+          model: 'User',
+          key: 'id',
+          as: 'bookingBy',
+        },
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+    }, {
+      freezeTableName: true,
+    }),
+  down: (queryInterface /*, Sequelize*/ ) =>
+    queryInterface.dropTable('Booking2')
+}

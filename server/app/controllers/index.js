@@ -10,15 +10,15 @@ const payments = require('./payment')
 const bethistory = require('./bethistory')
 
 module.exports = {
-    users,
-    bookings1,
-    bookings2,
-    bookings3,
-    moneychart,
-    admin,
-    moneycharts,
-    bookingcharts,
-    payments,
-    bethistory
+  users,
+  bookings1,
+  bookings2,
+  bookings3,
+  moneychart,
+  admin,
+  moneycharts,
+  bookingcharts,
+  payments,
+  bethistory
 
-};
+}
